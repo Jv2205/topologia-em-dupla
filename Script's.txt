@@ -1,0 +1,90 @@
+SW-01
+
+enable
+configure terminal 
+hostname SW-01
+enable secret JOAO*enable
+service password-encryption
+ip domain-name 1rede.local
+crypto key generate rsa general-key modulus 1024
+line console 0
+password JOAO*console
+login
+line vty 0 15 
+password JOAO*vty
+login
+transport input ssh
+exit
+interface vlan 1
+ip address 192.168.0.254 255.255.255.0
+no shutdown
+description INTERFACE DE GERENCIAMENTO
+exit
+ip default-gateway 192.168.0.1
+interface fastEthernet 0/1
+description CONECTADO AO PC-01
+interface gigabitEthernet 0/1
+description CONECTADO AO RT-01
+end
+wr
+
+SW-02
+
+
+enable
+configure terminal 
+hostname SW-02
+enable secret JOAO*enable
+service password-encryption
+ip domain-name 1rede.local
+crypto key generate rsa general-key modulus 1024
+line console 0
+password JOAO*console
+login
+line vty 0 15 
+password JOAO*vty
+login
+transport input ssh
+exit
+interface vlan 1
+ip address 172.16.255.254 255.255.255.0
+no shutdown
+description INTERFACE DE GERENCIAMENTO
+exit
+ip default-gateway 172.16.0.1
+interface fastEthernet 0/1
+description CONECTADO AO PC-02
+interface gigabitEthernet 0/1
+description CONECTADO AO RT-01
+end
+wr
+
+
+RT-01
+
+
+enable
+configure terminal 
+hostname RT-01
+enable secret JOAO*enable
+service password-encryption
+ip domain-name 1rede.local
+crypto key generate rsa general-key modulus 1024
+line console 0
+password JOAO*console
+login
+line vty 0 15 
+password JOAO*vty
+login
+transport input ssh
+exit
+interface gigabitEthernet 0/0
+description CONECTADO AO PC-01
+ip address 192.168.0.254 255.255.255.0
+no shutdown
+interface gigabitEthernet 0/1
+description CONECTADO AO RT-01
+ip address 172.16.255.254 255.255.255.0
+no shutdown
+end
+wr

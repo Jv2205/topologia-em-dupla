@@ -1,0 +1,15 @@
+Checklist
+
+Nome Externo
+Senha Enable
+Hostname
+Criptografar as senhas
+Domínio
+Chave do SSH
+Senha Console
+Senha VTY
+IP
+Ativar o SSH
+Gateway
+Descrição das portas
+WR
