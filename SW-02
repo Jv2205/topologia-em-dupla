@@ -1,0 +1,28 @@
+enable
+configure terminal 
+hostname SW-02
+enable secret JOAO*enable
+service password-encryption
+ip domain-name 1rede.local
+crypto key generate rsa general-key modulus 1024
+username JOAO privilege 15 secret JOAO*vty
+line console 0
+password JOAO*console
+login local
+line vty 0 15 
+password JOAO*vty
+login local
+transport input ssh
+exit
+interface vlan 1
+ip address 172.16.255.254 255.255.255.0
+no shutdown
+description INTERFACE DE GERENCIAMENTO
+exit
+ip default-gateway 172.16.0.1
+interface fastEthernet 0/1
+description CONECTADO AO PC-02
+interface gigabitEthernet 0/1
+description CONECTADO AO RT-01
+end
+wr
