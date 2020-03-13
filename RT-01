@@ -1,0 +1,26 @@
+enable
+configure terminal 
+hostname RT-01
+enable secret JOAO*enable
+service password-encryption
+ip domain-name 1rede.local
+crypto key generate rsa general-key modulus 1024
+username JOAO privilege 15 secret JOAO*vty
+line console 0
+password JOAO*console
+login local
+line vty 0 15 
+password JOAO*vty
+login local
+transport input ssh
+exit
+interface gigabitEthernet 0/0
+description CONECTADO AO PC-01
+ip address 192.168.0.1 255.255.255.0
+no shutdown
+interface gigabitEthernet 0/1
+description CONECTADO AO RT-01
+ip address 172.16.0.1 255.255.0.0
+no shutdown
+end
+wr
